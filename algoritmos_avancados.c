@@ -132,3 +132,14 @@ void explorarMansao(struct Sala* atual) {
             explorarMansao(atual); // Volta para a mesma sala
     }
 }
+
+// Função para liberar a memória da árvore (pós-ordem)
+void liberarArvore(struct Sala* raiz) {
+    if (raiz == NULL) {
+        return;
+    }
+    
+    liberarArvore(raiz->esquerda);
+    liberarArvore(raiz->direita);
+    free(raiz);
+}
