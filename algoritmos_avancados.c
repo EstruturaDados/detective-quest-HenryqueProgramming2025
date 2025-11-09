@@ -61,3 +61,13 @@ int main() {
     printf("\n=== INVESTIGAÇÃO ENCERRADA ===\n");
     return 0;
 }
+
+// Função para criar uma nova sala (nó da árvore)
+
+struct Sala* criarSala(const char* nome) {
+    struct Sala* novaSala = (struct Sala*)malloc(sizeof(struct Sala));
+    strcpy(novaSala->nome, nome);
+    novaSala->esquerda = NULL;
+    novaSala->direita = NULL;
+    return novaSala;
+}
