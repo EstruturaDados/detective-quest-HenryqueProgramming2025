@@ -71,3 +71,64 @@ struct Sala* criarSala(const char* nome) {
     novaSala->direita = NULL;
     return novaSala;
 }
+
+// Função para explorar a mansão (navegar pela árvore)
+void explorarMansao(struct Sala* atual) {
+    if (atual == NULL) {
+        return;
+    }
+    
+    printf("\n📍 Você está na: %s\n", atual->nome);
+    
+    // Verifica se é uma sala sem saída (nó folha)
+    if (atual->esquerda == NULL && atual->direita == NULL) {
+        printf("🚫 Esta sala não tem saídas. Fim do caminho!\n");
+        return;
+    }
+    
+    // Mostra opções de navegação
+    printf("Para onde deseja ir?\n");
+    if (atual->esquerda != NULL) {
+        printf("[E] Esquerda → %s\n", atual->esquerda->nome);
+    }
+    if (atual->direita != NULL) {
+        printf("[D] Direita → %s\n", atual->direita->nome);
+    }
+    printf("[S] Sair da investigação\n");
+    
+    char escolha;
+    printf("\nEscolha (E/D/S): ");
+    scanf(" %c", &escolha);
+    
+    // Processa a escolha do jogador
+    switch(escolha) {
+        case 'E':
+        case 'e':
+            if (atual->esquerda != NULL) {
+                explorarMansao(atual->esquerda);
+            } else {
+                printf("❌ Não há saída pela esquerda!\n");
+                explorarMansao(atual); // Volta para a mesma sala
+            }
+            break;
+            
+        case 'D':
+        case 'd':
+            if (atual->direita != NULL) {
+                explorarMansao(atual->direita);
+            } else {
+                printf("❌ Não há saída pela direita!\n");
+                explorarMansao(atual); // Volta para a mesma sala
+            }
+            break;
+            
+        case 'S':
+        case 's':
+            printf("🏃 Saindo da investigação...\n");
+            return;
+            
+        default:
+            printf("❌ Opção inválida! Use E, D ou S.\n");
+            explorarMansao(atual); // Volta para a mesma sala
+    }
+}
