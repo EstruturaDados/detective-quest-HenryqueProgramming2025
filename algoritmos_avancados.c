@@ -9,3 +9,8 @@ struct Sala {
     struct Sala* direita;
 };
 
+// Protótipos das funções
+struct Sala* criarSala(const char* nome);
+void explorarMansao(struct Sala* atual);
+void liberarArvore(struct Sala* raiz);
+
